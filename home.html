@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Inventário de Equipamentos de TI</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #007bff;
+      color: white;
+      padding: 20px;
+      position: relative;
+    }
+
+    header h1 {
+      margin: 0;
+      text-align: center;
+    }
+
+    .logo {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      height: 50px;
+    }
+
+    .logout-icon {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 24px;
+      color: white;
+      text-decoration: none;
+    }
+
+    .logout-icon:hover {
+      color: #ffcccb;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin: 15px 0;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #007bff;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #0056b3;
+    }
+
+    .container {
+      width: 80%;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    section {
+      margin-bottom: 40px;
+    }
+
+    h2 {
+      text-align: center;
+    }
+
+    img:not(.logo) {
+      display: block;
+      margin: 20px auto;
+      width: 50%;
+      border-radius: 8px;
+    }
+
+    form {
+      max-width: 600px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+    }
+
+    form label {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    form input, form select, form textarea {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      width: 200px;
+      align-self: center;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    button:disabled {
+      background-color: #ccc;
+      color: #666;
+      cursor: not-allowed;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    table, th, td {
+      border: 1px solid #ccc;
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #007bff;
+      color: #fff;
+    }
+
+    footer {
+      background-color: #007bff;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      margin-top: 40px;
+    }
+
+    address {
+      font-style: normal;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="logoFatec.png" alt="Logo" class="logo">
+    <a href="index.html" class="logout-icon" title="Sair">
+      <i class="fas fa-sign-out-alt"></i>
+    </a>
+    <h1>Inventário de Equipamentos de TI</h1>
+  </header>
+
+  <nav>
+    <a href="#descricao">Descrição</a>
+    <a href="#inventario">Inventário</a>
+    <a href="#contato">Contato</a>
+  </nav>
+
+  <main>
+    <section id="descricao" class="container">
+      <h2>Sobre o Sistema</h2>
+      <p>Este sistema auxilia no gerenciamento do inventário de equipamentos de TI, permitindo cadastrar e visualizar itens de forma eficiente.</p>
+      <img src="inventario.jpg" alt="Imagem de Equipamento de TI">
+    </section>
+  </main>
+
+    <!-- Seção de Cadastro de Equipamentos -->
+    <section id="inventario" class="container">
+      <h2>Cadastro de Equipamentos</h2>
+      <form id="formularioInventario">
+        <!-- Patrimônio -->
+        <div class="form-group">
+          <label for="patrimonio">Patrimônio</label>
+          <input type="text" id="patrimonio" required style="border: 1px solid #ccc;" placeholder="Somente números">
+          <div id="erroPatrimonio" style="color: red; font-size: 0.8em; margin-top: 5px; display: none;">
+            Por favor, preencha o patrimônio com apenas números.
+          </div>
+        </div>
+        <!-- Categoria -->
+        <div class="form-group">
+          <label for="categoria">Categoria</label>
+          <select id="categoria" required style="border: 1px solid #ccc;">
+            <option value="">Selecione a categoria</option>
+            <option value="computador">Computador</option>
+            <option value="perifericos">Periféricos</option>
+            <option value="impressora">Impressora</option>
+            <option value="monitor">Monitor</option>
+          </select>
+        </div>
+        <!-- Subcategoria -->
+        <div class="form-group">
+          <label for="subcategoria">Subcategoria</label>
+          <select id="subcategoria" disabled required style="border: 1px solid #ccc;">
+            <option value="">Selecione a subcategoria</option>
+          </select>
+        </div>
+        <!-- Marca -->
+        <div class="form-group">
+          <label for="marca">Marca</label>
+          <select id="marca" disabled required style="border: 1px solid #ccc;">
+            <option value="">Selecione a marca</option>
+          </select>
+        </div>
+        <!-- Modelo -->
+        <div class="form-group">
+          <label for="modelo">Modelo</label>
+          <select id="modelo" disabled required style="border: 1px solid #ccc;">
+            <option value="">Selecione o modelo</option>
+          </select>
+        </div>
+        <button type="submit" id="adicionarEquipamento" disabled>
+          Adicionar Equipamento
+        </button>
+      </form>
+      <div id="mensagemInventarioSucesso" style="display: none; background-color: #e6ffe6; color: #336633; border: 1px solid #99cc99; padding: 10px; margin-top: 10px; border-radius: 5px;">
+        Equipamento adicionado com sucesso!
+      </div>
+      <table id="tabelaInventario">
+        <thead>
+          <tr>
+            <th>Patrimônio</th>
+            <th>Categoria</th>
+            <th>Subcategoria</th>
+            <th>Marca</th>
+            <th>Modelo</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <!-- Botão para exportar a lista para CSV -->
+      <button id="exportarCSV" style="margin-top: 15px;">Exportar CSV</button>
+    </section>
+    
+    <!-- Formulário de Contato -->
+    <section id="contato" class="container">
+      <h2>Contato</h2>
+      <form id="formContato" action="index.html#contato" method="post">
+        <div class="form-group">
+          <label for="nomeContato">Nome</label>
+          <input type="text" id="nomeContato" name="nomeContato" required style="border: 1px solid #ccc;">
+          <div id="erroNome" style="color: red; font-size: 0.8em; margin-top: 5px; display: none;">
+            Nome inválido! Apenas letras e espaços são permitidos.
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="CPF">CPF</label>
+          <input type="text" id="CPF" name="CPF" required style="border: 1px solid #ccc;" placeholder="000.000.000-00">
+          <div id="erroCPF" style="color: red; font-size: 0.8em; margin-top: 5px; display: none;">
+            CPF inválido!
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required style="border: 1px solid #ccc;">
+          <div id="erroEmail" style="color: red; font-size: 0.8em; margin-top: 5px; display: none;">
+            Email inválido!
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="mensagem">Mensagem</label>
+          <textarea id="mensagem" name="mensagem" rows="4" required style="border: 1px solid #ccc;"></textarea>
+          <div id="erroMensagem" style="color: red; font-size: 0.8em; margin-top: 5px; display: none;">
+            Por favor, preencha a mensagem.
+          </div>
+        </div>
+        <button type="submit" id="enviarContato">
+          Enviar
+        </button>
+      </form>
+    </section>
+  </main>
+  <footer>
+    <address>
+      Contato: suporte@empresa.com | Telefone: (00) 1234-5678
+    </address>
+  </footer>
+  
+  <script>
+    /* ------------------------------ VALIDAÇÃO DO FORMULÁRIO DE CONTATO ------------------------------ */
+    const formContato = document.getElementById("formContato");
+    const nomeInput = document.getElementById("nomeContato");
+    const cpfInput = document.getElementById("CPF");
+    const emailInput = document.getElementById("email");
+    const mensagemInput = document.getElementById("mensagem");
+    const enviarContatoButton = document.getElementById("enviarContato");
+    const erroNome = document.getElementById("erroNome");
+    const erroCPF = document.getElementById("erroCPF");
+    const erroEmail = document.getElementById("erroEmail");
+    const erroMensagem = document.getElementById("erroMensagem");
+  
+    // Mensagem personalizada para campos obrigatórios (contato)
+    nomeInput.oninvalid = function(event) {
+      event.target.setCustomValidity('Por favor, preencha o nome.');
+    };
+    nomeInput.oninput = function(event) {
+      event.target.setCustomValidity('');
+    };
+    cpfInput.oninvalid = function(event) {
+      event.target.setCustomValidity('Por favor, preencha o CPF.');
+    };
+    cpfInput.oninput = function(event) {
+      event.target.setCustomValidity('');
+    };
+    emailInput.oninvalid = function(event) {
+      event.target.setCustomValidity('Por favor, preencha o email.');
+    };
+    emailInput.oninput = function(event) {
+      event.target.setCustomValidity('');
+    };
+    mensagemInput.oninvalid = function(event) {
+      event.target.setCustomValidity('Por favor, preencha a mensagem.');
+    };
+    mensagemInput.oninput = function(event) {
+      event.target.setCustomValidity('');
+    };
+  
+    // Validação do nome: apenas letras e espaços
+    function validarNome(nome) {
+      const re = /^[A-Za-zÀ-ÿ\s]+$/;
+      return re.test(nome);
+    }
+  
+    // Validação do CPF (somente dígitos)
+    function validarCPF(cpf) {
+      cpf = cpf.replace(/[^\d]+/g, '');
+      if (cpf === '' || cpf.length !== 11) return false;
+      if (/^(.)\1+$/.test(cpf)) return false;
+      let sum = 0, rest;
+      for (let i = 1; i <= 9; i++) {
+        sum += parseInt(cpf.substring(i - 1, i)) * (11 - i);
+      }
+      rest = (sum * 10) % 11;
+      if ((rest === 10) || (rest === 11)) rest = 0;
+      if (rest !== parseInt(cpf.substring(9, 10))) return false;
+      sum = 0;
+      for (let i = 1; i <= 10; i++) {
+        sum += parseInt(cpf.substring(i - 1, i)) * (12 - i);
+      }
+      rest = (sum * 10) % 11;
+      if ((rest === 10) || (rest === 11)) rest = 0;
+      if (rest !== parseInt(cpf.substring(10, 11))) return false;
+      return true;
+    }
+  
+    // Validação do email utilizando regex
+    function validarEmail(email) {
+      const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return re.test(email);
+    }
+  
+    // Formatação automática do CPF para o padrão 000.000.000-00
+    function formatarCPF(value) {
+      let cpf = value.replace(/\D/g, '').substr(0, 11);
+      if (cpf.length > 3) cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2');
+      if (cpf.length > 6) cpf = cpf.replace(/(\d{3}\.\d{3})(\d)/, '$1.$2');
+      if (cpf.length > 9) cpf = cpf.replace(/(\d{3}\.\d{3}\.\d{3})(\d)/, '$1-$2');
+      return cpf;
+    }
+  
+    // Evento para validar e formatar o CPF
+    cpfInput.addEventListener("input", function() {
+      cpfInput.value = formatarCPF(cpfInput.value);
+      const cpfLimpo = cpfInput.value.replace(/\D/g, '');
+      if (cpfLimpo === "" || !validarCPF(cpfLimpo)) {
+        cpfInput.style.borderColor = 'red';
+        erroCPF.style.display = "block";
+      } else {
+        cpfInput.style.borderColor = 'green';
+        erroCPF.style.display = "none";
+      }
+      verificarFormularioContato();
+    });
+  
+    // Evento para validar o email
+    emailInput.addEventListener("input", function() {
+      const email = emailInput.value.trim();
+      if (email === "" || !validarEmail(email)) {
+        emailInput.style.borderColor = 'red';
+        erroEmail.style.display = "block";
+      } else {
+        emailInput.style.borderColor = 'green';
+        erroEmail.style.display = "none";
+      }
+      verificarFormularioContato();
+    });
+  
+    // Evento para validar o campo nome
+    nomeInput.addEventListener("input", function() {
+      const nome = nomeInput.value.trim();
+      if (nome === "" || !validarNome(nome)) {
+        nomeInput.style.borderColor = 'red';
+        erroNome.style.display = "block";
+      } else {
+        nomeInput.style.borderColor = 'green';
+        erroNome.style.display = "none";
+      }
+      verificarFormularioContato();
+    });
+  
+    // Evento para validar o campo mensagem (exibição de erro)
+    mensagemInput.addEventListener("input", function() {
+      const mensagem = mensagemInput.value.trim();
+      if (mensagem === "") {
+        mensagemInput.style.borderColor = 'red';
+        erroMensagem.style.display = "block";
+      } else {
+        mensagemInput.style.borderColor = 'green';
+        erroMensagem.style.display = "none";
+      }
+      verificarFormularioContato();
+    });
+  
+    // Mensagem personalizada para o campo patrimônio (formulário de inventário)
+    const patrimonioInput = document.getElementById("patrimonio");
+    patrimonioInput.oninvalid = function(event) {
+      event.target.setCustomValidity('Por favor, preencha o patrimônio com apenas números.');
+    };
+    patrimonioInput.oninput = function(event) {
+      event.target.setCustomValidity('');
+    };
+  
+    // Função para verificar se todos os campos do formulário de contato estão válidos
+    function verificarFormularioContato() {
+      const nomeValido = nomeInput.value.trim() !== "" && validarNome(nomeInput.value.trim());
+      const cpfValido = cpfInput.value.trim() !== "" && validarCPF(cpfInput.value.replace(/\D/g, ''));
+      const emailValido = emailInput.value.trim() !== "" && validarEmail(emailInput.value.trim());
+      const mensagemValida = mensagemInput.value.trim() !== "";
+  
+      enviarContatoButton.disabled = !(nomeValido && cpfValido && emailValido && mensagemValida);
+  
+      if (enviarContatoButton.disabled) {
+        enviarContatoButton.style.backgroundColor = '#ccc';
+        enviarContatoButton.style.color = '#666';
+        enviarContatoButton.style.cursor = 'not-allowed';
+      } else {
+        enviarContatoButton.style.backgroundColor = '#007bff';
+        enviarContatoButton.style.color = '#fff';
+        enviarContatoButton.style.cursor = 'pointer';
+      }
+    }
+  
+    mensagemInput.addEventListener("input", verificarFormularioContato);
+  
+    formContato.addEventListener("submit", function(e) {
+      e.preventDefault();
+      if (
+        nomeInput.value.trim() !== "" && validarNome(nomeInput.value.trim()) &&
+        cpfInput.value.trim() !== "" && validarCPF(cpfInput.value.replace(/\D/g, '')) &&
+        emailInput.value.trim() !== "" && validarEmail(emailInput.value.trim()) &&
+        mensagemInput.value.trim() !== ""
+      ) {
+        alert("Sua mensagem foi enviada com sucesso. Entraremos em contato o mais rápido possível.");
+        formContato.reset();
+        nomeInput.style.borderColor = '#ccc';
+        cpfInput.style.borderColor = '#ccc';
+        emailInput.style.borderColor = '#ccc';
+        mensagemInput.style.borderColor = '#ccc';
+        verificarFormularioContato();
+      }
+    });
+  
+    /* ------------------------------ LÓGICA DE INVENTÁRIO: Categoria, Subcategoria, Marca, Modelo ------------------------------ */
+    const subcategoriasMap = {
+      computador: ["Desktop", "Notebook"],
+      perifericos: ["Mouse", "Teclado", "Caixa de Som"],
+      impressora: ["Laser", "Jato de Tinta", "Matricial"],
+      monitor: ["LCD", "LED", "OLED"]
+    };
+  
+    const marcasMap = {
+      "Desktop": ["Dell", "HP", "Lenovo"],
+      "Notebook": ["Dell", "HP", "Apple", "Lenovo"],
+      "Mouse": ["Logitech", "Microsoft", "HP"],
+      "Teclado": ["Logitech", "Corsair", "Razer"],
+      "Caixa de Som": ["Bose", "Sony", "JBL"],
+      "Laser": ["HP", "Canon"],
+      "Jato de Tinta": ["Epson", "Canon"],
+      "Matricial": ["OKI", "Epson"],
+      "LCD": ["Samsung", "LG"],
+      "LED": ["Samsung", "LG", "Philips"],
+      "OLED": ["LG", "Sony"]
+    };
+  
+    const modelosMap = {
+      dell: ["Inspiron", "XPS", "OptiPlex"],
+      hp: ["Pavilion", "Envy", "EliteBook"],
+      lenovo: ["ThinkCentre", "IdeaCentre", "ThinkPad"],
+      apple: ["MacBook Air", "MacBook Pro", "iMac"],
+      logitech: ["M185", "M330", "MX Master"],
+      microsoft: ["Bluetooth Mouse", "Basic Mouse"],
+      corsair: ["K70", "K95", "Strafe"],
+      razer: ["BlackWidow", "Huntsman", "Ornata"],
+      bose: ["Companion 2", "SoundLink Mini"],
+      sony: ["SRS-XB12", "SRS-XB23"],
+      jbl: ["Charge 3", "Flip 5"],
+      canon: ["ImageCLASS", "PIXMA"],
+      epson: ["EcoTank", "WorkForce"],
+      oki: ["Microline", "C532"],
+      samsung: ["Series 7", "Series 8"],
+      lg: ["UltraFine", "Gram", "SmartMonitor"],
+      philips: ["Brilliance", "E-Line"]
+    };
+  
+    const formularioInventario = document.getElementById("formularioInventario");
+    const categoriaSelect = document.getElementById("categoria");
+    const subcategoriaSelect = document.getElementById("subcategoria");
+    const marcaSelect = document.getElementById("marca");
+    const modeloSelect = document.getElementById("modelo");
+    const adicionarEquipamentoButton = document.getElementById("adicionarEquipamento");
+    const tabelaInventario = document.getElementById("tabelaInventario").getElementsByTagName('tbody')[0];
+    const erroPatrimonioDiv = document.getElementById("erroPatrimonio");
+  
+    let dadosInventario = [];
+  
+    function popularSubcategorias() {
+      const categoriaSelecionada = categoriaSelect.value;
+      subcategoriaSelect.innerHTML = '<option value="">Selecione a subcategoria</option>';
+      marcaSelect.innerHTML = '<option value="">Selecione a marca</option>';
+      modeloSelect.innerHTML = '<option value="">Selecione o modelo</option>';
+      marcaSelect.disabled = true;
+      modeloSelect.disabled = true;
+  
+      if (categoriaSelecionada) {
+        const subcategorias = subcategoriasMap[categoriaSelecionada] || [];
+        subcategorias.forEach(subcategoria => {
+          const option = document.createElement("option");
+          option.value = subcategoria;
+          option.textContent = subcategoria;
+          subcategoriaSelect.appendChild(option);
+        });
+        subcategoriaSelect.disabled = false;
+      } else {
+        subcategoriaSelect.disabled = true;
+      }
+      verificarBotaoAdicionar();
+    }
+  
+    function popularMarcas() {
+      const subcategoriaSelecionada = subcategoriaSelect.value;
+      marcaSelect.innerHTML = '<option value="">Selecione a marca</option>';
+      modeloSelect.innerHTML = '<option value="">Selecione o modelo</option>';
+      modeloSelect.disabled = true;
+  
+      if (subcategoriaSelecionada) {
+        const marcas = marcasMap[subcategoriaSelecionada] || [];
+        marcas.forEach(marca => {
+          const option = document.createElement("option");
+          option.value = marca;
+          option.textContent = marca;
+          marcaSelect.appendChild(option);
+        });
+        marcaSelect.disabled = false;
+      } else {
+        marcaSelect.disabled = true;
+      }
+      verificarBotaoAdicionar();
+    }
+  
+    function popularModelos() {
+      const marcaSelecionada = marcaSelect.value;
+      modeloSelect.innerHTML = '<option value="">Selecione o modelo</option>';
+  
+      if (marcaSelecionada) {
+        const key = marcaSelecionada.toLowerCase();
+        const modelos = modelosMap[key] || [];
+        modelos.forEach(modelo => {
+          const option = document.createElement("option");
+          option.value = modelo;
+          option.textContent = modelo;
+          modeloSelect.appendChild(option);
+        });
+        modeloSelect.disabled = false;
+      } else {
+        modeloSelect.disabled = true;
+      }
+      verificarBotaoAdicionar();
+    }
+  
+    function verificarBotaoAdicionar() {
+      const patrimonioValido = /^\d+$/.test(patrimonioInput.value.trim());
+      const categoriaSelecionada = categoriaSelect.value !== "";
+      const subcategoriaSelecionada = subcategoriaSelect.value !== "";
+      const marcaSelecionada = marcaSelect.value !== "";
+      const modeloSelecionado = modeloSelect.value !== "";
+  
+      adicionarEquipamentoButton.disabled = !(patrimonioValido && categoriaSelecionada && subcategoriaSelecionada && marcaSelecionada && modeloSelecionado);
+      erroPatrimonioDiv.style.display = patrimonioValido || patrimonioInput.value.trim() === "" ? 'none' : 'block';
+  
+      if (adicionarEquipamentoButton.disabled) {
+        adicionarEquipamentoButton.style.backgroundColor = '#ccc';
+        adicionarEquipamentoButton.style.color = '#666';
+        adicionarEquipamentoButton.style.cursor = 'not-allowed';
+      } else {
+        adicionarEquipamentoButton.style.backgroundColor = '';
+        adicionarEquipamentoButton.style.color = '';
+        adicionarEquipamentoButton.style.cursor = 'pointer';
+      }
+    }
+  
+    function adicionarEquipamento() {
+      if (!adicionarEquipamentoButton.disabled) {
+        const patrimonio = patrimonioInput.value.trim();
+        const categoria = categoriaSelect.value;
+        const subcategoria = subcategoriaSelect.value;
+        const marca = marcaSelect.value;
+        const modelo = modeloSelect.value;
+  
+        const novoEquipamento = { patrimonio, categoria, subcategoria, marca, modelo };
+        dadosInventario.push(novoEquipamento);
+        atualizarTabela();
+  
+        formularioInventario.reset();
+        subcategoriaSelect.innerHTML = '<option value="">Selecione a subcategoria</option>';
+        marcaSelect.innerHTML = '<option value="">Selecione a marca</option>';
+        modeloSelect.innerHTML = '<option value="">Selecione o modelo</option>';
+        subcategoriaSelect.disabled = true;
+        marcaSelect.disabled = true;
+        modeloSelect.disabled = true;
+        adicionarEquipamentoButton.disabled = true;
+        adicionarEquipamentoButton.style.backgroundColor = '#ccc';
+        adicionarEquipamentoButton.style.color = '#666';
+        adicionarEquipamentoButton.style.cursor = 'not-allowed';
+        verificarBotaoAdicionar();
+      }
+    }
+  
+    function atualizarTabela() {
+      tabelaInventario.innerHTML = '';
+      dadosInventario.forEach((equipamento, index) => {
+        const row = tabelaInventario.insertRow();
+        row.insertCell(0).textContent = equipamento.patrimonio;
+        row.insertCell(1).textContent = equipamento.categoria;
+        row.insertCell(2).textContent = equipamento.subcategoria;
+        row.insertCell(3).textContent = equipamento.marca;
+        row.insertCell(4).textContent = equipamento.modelo;
+        row.insertCell(5).innerHTML = `<button onclick="removerEquipamento(${index})" style="background-color:#dc3545;color:#fff;border:none;padding:5px 10px;border-radius:5px;cursor:pointer;transition:background-color 0.3s ease;">Remover</button>`;
+      });
+    }
+  
+    function removerEquipamento(index) {
+      dadosInventario.splice(index, 1);
+      atualizarTabela();
+    }
+  
+    categoriaSelect.addEventListener("change", popularSubcategorias);
+    subcategoriaSelect.addEventListener("change", popularMarcas);
+    marcaSelect.addEventListener("change", popularModelos);
+    patrimonioInput.addEventListener("input", verificarBotaoAdicionar);
+  
+    formularioInventario.addEventListener("submit", function(event) {
+      event.preventDefault();
+      adicionarEquipamento();
+    });
+  
+    /* ------------------------------ EXPORTAR CSV ------------------------------ */
+    // Função que converte os dados do inventário para CSV e força o download do arquivo.
+    document.getElementById("exportarCSV").addEventListener("click", function() {
+      if (dadosInventario.length === 0) {
+        alert("Não há equipamentos para exportar.");
+        return;
+      }
+  
+      let csvContent = "data:text/csv;charset=utf-8,";
+      // Cabeçalho do CSV
+      csvContent += "Patrimonio,Categoria,Subcategoria,Marca,Modelo\r\n";
+  
+      // Dados do inventário
+      dadosInventario.forEach(function(item) {
+        // Formata cada linha e adiciona ao conteúdo CSV
+        const linha = `${item.patrimonio},${item.categoria},${item.subcategoria},${item.marca},${item.modelo}\r\n`;
+        csvContent += linha;
+      });
+  
+      // Cria um link temporário e força o download do arquivo CSV
+      const encodedUri = encodeURI(csvContent);
+      const link = document.createElement("a");
+      link.setAttribute("href", encodedUri);
+      link.setAttribute("download", "inventario_ti.csv");
+      document.body.appendChild(link);
+  
+      link.click();
+  
+      document.body.removeChild(link);
+    });
+  
+    /* ------------------------------ FIM LOGICA INVENTARIO ------------------------------ */
+  </script>
+</body>
+</html>
